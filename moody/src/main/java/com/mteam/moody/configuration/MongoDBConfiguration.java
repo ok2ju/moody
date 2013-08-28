@@ -5,7 +5,9 @@ import org.springframework.data.mongodb.config.AbstractMongoConfiguration;
 
 import com.mongodb.Mongo;
 import com.mongodb.MongoClient;
-
+/**
+ * @author Aleh_Atsman
+ */
 @Configuration
 public class MongoDBConfiguration extends AbstractMongoConfiguration {
 
