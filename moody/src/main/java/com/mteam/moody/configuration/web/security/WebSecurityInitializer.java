@@ -1,9 +1,9 @@
-package com.mteam.moody.configuration;
+
+package com.mteam.moody.configuration.web.security;
 
 import org.springframework.security.web.context.AbstractSecurityWebApplicationInitializer;
 
-/**
- * @author Aleh_Atsman
- */
+
 public class WebSecurityInitializer extends AbstractSecurityWebApplicationInitializer {
+	
 }

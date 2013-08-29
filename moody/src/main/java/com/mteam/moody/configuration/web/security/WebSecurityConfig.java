@@ -1,12 +1,10 @@
-package com.mteam.moody.configuration;
+package com.mteam.moody.configuration.web.security;
 
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-/**
- * @author Aleh_Atsman
- */
+
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
@@ -14,7 +12,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http
 			.authorizeUrls()
-				.antMatchers("/assets/**").permitAll()
+				.antMatchers("/**").permitAll()
 				.anyRequest().authenticated()
 				.and()
 			.logout()
@@ -23,17 +21,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.permitAll()
 				.and()
 			.formLogin()
-				.defaultSuccessUrl("/index.html")
-				.loginUrl("/login.html")
+				.defaultSuccessUrl("/async")
+				.loginUrl("/login")
 				.failureUrl("/login.html?error")
 				.permitAll();
 	}
 
 	@Override
-	protected void registerAuthentication(AuthenticationManagerBuilder auth) throws Exception {
+	protected void registerAuthentication(AuthenticationManagerBuilder auth)
+			throws Exception {
 		auth
 			.inMemoryAuthentication()
-				.withUser("admin").password("admin").roles("ADMIN","USER").and()
-				.withUser("user").password("user").roles("USER");
+				.withUser("user").password("user").roles("USER").and()
+				.withUser("admin").password("admin").roles("ADMIN","USER");
 	}
 }

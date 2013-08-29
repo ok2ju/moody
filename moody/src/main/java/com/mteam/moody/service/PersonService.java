@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.mteam.moody.model.User;
+import com.mteam.moody.model.user.User;
  
 @Repository
 public class PersonService {
@@ -16,7 +16,11 @@ public class PersonService {
     private MongoTemplate mongoTemplate;
      
     public static final String COLLECTION_NAME = "person";
-     
+    
+    public void clean() {
+    	mongoTemplate.dropCollection(COLLECTION_NAME);
+    }
+    
     public void addPerson(User person) {
         if (!mongoTemplate.collectionExists(User.class)) {
             mongoTemplate.createCollection(User.class);
@@ -24,7 +28,9 @@ public class PersonService {
         person.setId(UUID.randomUUID().toString());
         mongoTemplate.insert(person, COLLECTION_NAME);
     }
-     
+    
+    
+    
     public List<User> listPerson() {
         return mongoTemplate.findAll(User.class, COLLECTION_NAME);
     }

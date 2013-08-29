@@ -1,4 +1,4 @@
-package com.mteam.moody.configuration;
+package com.mteam.moody.configuration.db;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.config.AbstractMongoConfiguration;
@@ -24,5 +24,4 @@ public class MongoDBConfiguration extends AbstractMongoConfiguration {
 	public Mongo mongo() throws Exception {
 		return new MongoClient(DATABASE_HOST);
 	}
-
 }
