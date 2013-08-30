@@ -1,6 +1,5 @@
 package com.mteam.moody.web.controllers;
 
-import java.io.IOException;
 import java.util.Locale;
 import java.util.Random;
 import java.util.concurrent.Callable;
@@ -8,8 +7,6 @@ import java.util.concurrent.TimeUnit;
 
 import org.atmosphere.cpr.AtmosphereResource;
 import org.atmosphere.cpr.Broadcaster;
-import org.codehaus.jackson.JsonGenerationException;
-import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -66,12 +63,11 @@ public class MoodyDevController {
 		logger.info("MoodyDevController: Async called");
 		
 		asyncService.suspend(atmosphereResource);
-		final Broadcaster bc = atmosphereResource.getBroadcaster();
 		
-		logger.info("Atmo Resource Size: " + bc.getAtmosphereResources().size());
+		logger.info("Atmo Resource Size: " + asyncService.getChatBroadcaster().getAtmosphereResources().size());
 		final Random r = new Random();
 
-		bc.scheduleFixedBroadcast(new Callable<String>() {
+		asyncService.getChatBroadcaster().scheduleFixedBroadcast(new Callable<String>() {
             @Override
             public String call() throws Exception {
                 return mapper.writeValueAsString(r.nextInt(500));
