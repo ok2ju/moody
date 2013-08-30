@@ -1,17 +1,16 @@
 package com.mteam.moody.web.controllers;
 
-import java.text.DateFormat;
-import java.util.Date;
+import java.io.IOException;
 import java.util.Locale;
 import java.util.Random;
 import java.util.concurrent.Callable;
-import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
 import org.atmosphere.cpr.AtmosphereResource;
-import org.atmosphere.cpr.AtmosphereResourceEvent;
-import org.atmosphere.cpr.AtmosphereResourceEventListenerAdapter;
 import org.atmosphere.cpr.Broadcaster;
+import org.codehaus.jackson.JsonGenerationException;
+import org.codehaus.jackson.map.JsonMappingException;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,38 +19,26 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.codehaus.jackson.map.ObjectMapper;
 
 import com.mteam.moody.model.user.User;
 import com.mteam.moody.service.PersonService;
+import com.mteam.moody.web.asynchronous.AsynchronousService;
 
 /**
  * Handles requests for the application home page.
  */
 @Controller
-public class HomeController {
+public class MoodyDevController {
 	
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+	private static final Logger logger = LoggerFactory.getLogger(MoodyDevController.class);
+	
+	private final ObjectMapper mapper = new ObjectMapper();
 	
 	@Autowired
 	private PersonService personService;
 	
-	private void suspend(final AtmosphereResource resource) {
-        final CountDownLatch countDownLatch = new CountDownLatch(1);
-        resource.addEventListener(new AtmosphereResourceEventListenerAdapter() {
-            @Override
-            public void onSuspend(AtmosphereResourceEvent event) {
-                countDownLatch.countDown();
-                resource.removeEventListener(this);
-            }
-        });
-        resource.suspend();
-        try {
-            countDownLatch.await();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
+	@Autowired
+	private AsynchronousService asyncService;
 	
 	/**
 	 * Simply selects the home view to render by returning its name.
@@ -76,13 +63,14 @@ public class HomeController {
 	@RequestMapping(value = "/async", method = RequestMethod.GET)
 	@ResponseBody
 	public void async(AtmosphereResource atmosphereResource) {
-		logger.info("Async done.");
-		final ObjectMapper mapper = new ObjectMapper();
-		this.suspend(atmosphereResource);
+		logger.info("MoodyDevController: Async called");
+		
+		asyncService.suspend(atmosphereResource);
 		final Broadcaster bc = atmosphereResource.getBroadcaster();
+		
 		logger.info("Atmo Resource Size: " + bc.getAtmosphereResources().size());
 		final Random r = new Random();
-		
+
 		bc.scheduleFixedBroadcast(new Callable<String>() {
             @Override
             public String call() throws Exception {

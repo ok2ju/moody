@@ -381,6 +381,7 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="assets/js/jquery.js"></script>
+    <script src="assets/js/jquery-migrate-plugin.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
     <script src="assets/js/holder.js"></script>
     <script src="assets/js/jquery.atmosphere.js"></script>
