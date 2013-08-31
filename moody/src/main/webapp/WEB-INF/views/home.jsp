@@ -22,7 +22,7 @@
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="assets/js/html5shiv.js"></script>
-      <script src="assets/js/respond.min.js"></script>
+      <script src="assets/js/bootstrap/respond.min.js"></script>
     <![endif]-->
   </head>
 
@@ -380,10 +380,10 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="assets/js/jquery.js"></script>
-    <script src="assets/js/jquery-migrate-plugin.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
-    <script src="assets/js/holder.js"></script>
-    <script src="assets/js/jquery.atmosphere.js"></script>
+    <script src="assets/js/jquery/jquery.js"></script>
+    <script src="assets/js/jquery/jquery-migrate-plugin.js"></script>
+    <script src="assets/js/bootstrap/bootstrap.min.js"></script>
+    <script src="assets/js/bootstrap/holder.js"></script>
+    <script src="assets/js/atmosphere/jquery.atmosphere.js"></script>
   </body>
 </html>

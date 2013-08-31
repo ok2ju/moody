@@ -2,9 +2,6 @@ package com.mteam.moody.model.user;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-
-import com.mteam.moody.model.user.information.Information;
-import com.mteam.moody.model.user.settings.Settings;
  
 @Document
 public class User {
