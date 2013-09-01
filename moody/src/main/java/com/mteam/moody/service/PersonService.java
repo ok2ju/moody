@@ -5,7 +5,11 @@ import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
+
+import static org.springframework.data.mongodb.core.query.Criteria.where;
 
 import com.mteam.moody.model.user.User;
  
@@ -29,7 +33,13 @@ public class PersonService {
         mongoTemplate.insert(person, COLLECTION_NAME);
     }
     
-    
+    public List<User> findByName(String name) {
+    	Criteria criteria = where("username").is(name);
+    	Query query = new Query(criteria);
+    	List<User> users = mongoTemplate.find(query, User.class, COLLECTION_NAME);
+    	
+    	return users;
+    }
     
     public List<User> listPerson() {
         return mongoTemplate.findAll(User.class, COLLECTION_NAME);

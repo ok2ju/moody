@@ -51,6 +51,12 @@ public class MoodyDevController {
 		return "home";
 	}
 	
+	@RequestMapping(value = "/home", method = RequestMethod.GET)
+	public String moodyHomePage(Model model) {
+		model.addAttribute("person", personService.findByName("Oleg").get(0));
+		return "moodyHomePage";
+	}
+	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String login() {
 		return "login";
