@@ -12,3 +12,39 @@ body {
 .theme-showcase > p > .btn {
   margin: 5px 0;
 }
+
+.stats {
+	margin: 0 0 17px 0;
+	padding: 6px 0 15px 0;
+	text-align: center;
+}
+
+ul.stats {
+	border-top: 1px solid #DDD;
+}
+
+ul.stats li {
+	display: inline-block;
+	list-style-type: none;
+	min-width: 60px;
+}
+
+ul.stats li a {
+	text-decoration: none;
+}
+
+ul.stats li a span {
+	display: block;
+	margin-top: -2px;
+	font-size: 11px;
+	color: #999;
+}
+
+ul.stats li a strong {
+	display: block;
+	font-size: 28px;
+	line-height: 1;
+	font-weight: bold;
+	color: #222;
+}
+

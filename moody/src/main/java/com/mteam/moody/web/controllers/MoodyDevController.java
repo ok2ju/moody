@@ -44,7 +44,7 @@ public class MoodyDevController {
 		logger.info("Welcome home! The client locale is {}.", locale);
 		
 		personService.clean();
-		personService.addPerson(new User("Oleg"));
+		personService.addPerson(new User("Oleg Atsman"));
 		
 		model.addAttribute("person", personService.listPerson().get(0));
 		
@@ -53,7 +53,7 @@ public class MoodyDevController {
 	
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
 	public String moodyHomePage(Model model) {
-		model.addAttribute("person", personService.findByName("Oleg").get(0));
+		model.addAttribute("person", personService.findByName("Oleg Atsman").get(0));
 		return "moodyHomePage";
 	}
 	

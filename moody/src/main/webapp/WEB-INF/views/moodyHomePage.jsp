@@ -63,7 +63,7 @@
 
 	<div class="container theme-showcase">
 		<div class="row">
-			<div class="col-sm-3">
+			<div class="col-sm-4 col-md-3 col-lg-3">
 				<div class="avatared">
 					<img data-src="holder.js/200x200" src="data:image/png;base64,"
 						class="img-thumbnail"
@@ -72,7 +72,28 @@
 					<h2>
 						<span class="name">${person.username}</span>
 					</h2>
-				</div>
+	
+					<ul class="stats" style="">
+						<li>
+							<a href="/OlegAtsman/followers"> 
+								<strong>1</strong>
+								<span>follower</span>
+							</a>
+						</li>
+						<li>
+							<a href="/stars"> 
+								<strong>6</strong> 
+								<span>starred</span>
+							</a>
+						</li>
+						<li>
+							<a href="/OlegAtsman/following"> 
+								<strong>1</strong>
+								<span>following</span>
+							</a>
+						</li>
+					</ul>
+					</div>
 			</div>
 		</div>
 
