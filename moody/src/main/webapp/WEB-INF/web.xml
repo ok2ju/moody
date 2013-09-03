@@ -18,7 +18,6 @@
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>com.mteam.moody.configuration.AppConfig
-					 com.mteam.moody.configuration.web.security.WebSecurityConfig
 		</param-value>
 	</context-param>	
 

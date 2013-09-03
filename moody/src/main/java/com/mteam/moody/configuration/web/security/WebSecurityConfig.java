@@ -1,17 +1,19 @@
 package com.mteam.moody.configuration.web.security;
 
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
+import com.mteam.moody.configuration.db.MongoDBConfiguration;
 import com.mteam.moody.service.UserService;
 
-@Configuration
 @EnableWebSecurity
+@Import(MongoDBConfiguration.class)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Override
@@ -33,9 +35,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.permitAll();
 	}
 	
+	@Override
+	protected void registerAuthentication(AuthenticationManagerBuilder auth) throws Exception {
+		auth.userDetailsService(userDetailsService()).and().build();
+		System.out.println(auth.getDefaultUserDetailsService().toString());
+	}
+	
+	@Bean
+	protected AuthenticationManager authenticationManager() throws Exception {
+		return (AuthenticationManager) new AuthenticationManagerBuilder().userDetailsService(userDetailsService()).and().build();
+	}
+	
+	@Override
 	@Bean
 	protected UserDetailsService userDetailsService() {
 		return new UserService();
 	}
-	
 }
