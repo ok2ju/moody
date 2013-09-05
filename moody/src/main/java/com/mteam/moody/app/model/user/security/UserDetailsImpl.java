@@ -1,4 +1,4 @@
-package com.mteam.moody.model.user.security;
+package com.mteam.moody.app.model.user.security;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -28,6 +28,17 @@ public class UserDetailsImpl implements UserDetails, Serializable {
 	
 	public UserDetailsImpl() {
 		
+	}
+	
+	public UserDetailsImpl(String username, String password, ArrayList<GrantedAuthority> authorities) {
+		super();
+		this.username = username;
+		this.password = password;
+		this.accountNonExpired = true;
+		this.accountNonLocked = true;
+		this.credentialsNonExpired = true;
+		this.enabled = true;
+		this.authorities = authorities;
 	}
 	
 	public UserDetailsImpl(String username, String password, boolean accountNonExpired, 

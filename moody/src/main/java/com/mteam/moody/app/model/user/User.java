@@ -1,11 +1,13 @@
-package com.mteam.moody.model.user;
+package com.mteam.moody.app.model.user;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import com.mteam.moody.model.user.security.UserDetailsImpl;
-import com.mteam.moody.model.user.smile.Smile;
+
+import com.mteam.moody.app.model.user.security.UserDetailsImpl;
+import com.mteam.moody.app.model.user.smile.Smile;
  
 @Document
 public class User {

@@ -1,25 +1,18 @@
 package com.mteam.moody.configuration.web.security;
 
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Import;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.context.annotation.ImportResource;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.UserDetailsService;
-
-import com.mteam.moody.configuration.db.MongoDBConfiguration;
-import com.mteam.moody.service.UserService;
 
 @EnableWebSecurity
-@Import(MongoDBConfiguration.class)
+@ImportResource({"/WEB-INF/config/security.xml"})
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http
-			.authorizeUrls()
+		http.csrf().disable()
+			.authorizeRequests()
 				.antMatchers("/assets/**").permitAll()
 				.anyRequest().authenticated()
 				.and()
@@ -30,25 +23,23 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.and()
 			.formLogin()
 				.defaultSuccessUrl("/index.html")
-				.loginUrl("/login.html")
+				.loginPage("/login.html")
 				.failureUrl("/login.html?error")
 				.permitAll();
 	}
 	
-	@Override
+	/*@Override
 	protected void registerAuthentication(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(userDetailsService()).and().build();
-		System.out.println(auth.getDefaultUserDetailsService().toString());
-	}
+		auth.inMemoryAuthentication().withUser("oleg").password("oleg").roles("USER");
+	}*/
 	
-	@Bean
+	/*@Bean
 	protected AuthenticationManager authenticationManager() throws Exception {
 		return (AuthenticationManager) new AuthenticationManagerBuilder().userDetailsService(userDetailsService()).and().build();
 	}
 	
-	@Override
-	@Bean
+	@Bean(name="myUserDetailsService")
 	protected UserDetailsService userDetailsService() {
-		return new UserService();
-	}
+		return new UserDetailsServiceImpl();
+	}*/
 }
