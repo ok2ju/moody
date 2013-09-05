@@ -12,6 +12,8 @@ public interface UserService {
 	
 	public void addUser(User user);
 	
+	public void addUsers(List<User> users);
+	
 	public User findByUsername(String username);
 	
 	public List<User> listUsers();

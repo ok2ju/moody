@@ -6,12 +6,16 @@ import java.util.Random;
 import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
 
+import javax.servlet.ServletRequest;
+
 import org.atmosphere.cpr.AtmosphereResource;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -48,24 +52,9 @@ public class MoodyDevController {
 		return "home";
 	}
 	
-	@RequestMapping(value = "/createTestUser", method = RequestMethod.GET)
-	public String createTestUser() {
-		personService.cleanCollection();
-		User testUser = new User();
-		testUser.getUserDetails().setUsername("olegatsman");
-		testUser.getUserDetails().setPassword("1234");
-		testUser.getUserDetails().setEnabled(true);
-		testUser.getUserDetails().setCredentialsNonExpired(true);
-		testUser.getUserDetails().setAccountNonLocked(true);
-		testUser.getUserDetails().setAccountNonExpired(true);
-		ArrayList<GrantedAuthority> auth = new ArrayList<GrantedAuthority>();
-		
-		MoodyGrantedAuthority m = new MoodyGrantedAuthority("USER");
-		
-		auth.add(m);
-		
-		testUser.getUserDetails().setAuthorities(auth);
-		personService.addUser(testUser);
+	@RequestMapping(value = "/fillDB", method = RequestMethod.GET)
+	public String fillBDMethod() {
+		fillBD();
 		return "home";
 	}
 	
@@ -73,7 +62,8 @@ public class MoodyDevController {
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
 	public String moodyHomePage(Model model) {
 		LOGGER.info("MoodyDevColtroller - moodyHome");
-		User user = personService.findByUsername("olegatsman");
+		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		User user = personService.findByUsername(userDetails.getUsername());
 		model.addAttribute("person", user);
 		return "moodyHomePage";
 	}
@@ -87,7 +77,6 @@ public class MoodyDevController {
 	@ResponseBody
 	public void async(AtmosphereResource atmosphereResource) {		
 		LOGGER.info("MoodyDevController - async user: " + atmosphereResource.getRequest().getUserPrincipal().getName());
-		
 		asyncService.suspend(atmosphereResource);
 		
 		LOGGER.info("Atmo Resource Size: " + asyncService.getChatBroadcaster().getAtmosphereResources().size());
@@ -100,4 +89,22 @@ public class MoodyDevController {
             }
         }, 3, TimeUnit.SECONDS);
 	}
+	
+	private void fillBD() {
+		personService.cleanCollection();
+		ArrayList<User> users = new ArrayList<User>();
+		ArrayList<GrantedAuthority> auth = new ArrayList<GrantedAuthority>();
+		MoodyGrantedAuthority userRole = new MoodyGrantedAuthority("USER");
+		auth.add(userRole);
+		
+		User oleg = new User("oleg", "oleg", auth);
+		User anton = new User("anton", "anton", auth);
+		User lesha2 = new User("lesha2", "lesha2", auth);
+		users.add(oleg);
+		users.add(anton);
+		users.add(lesha2);
+		personService.addUsers(users);
+	}
+	
+	
 }

@@ -76,4 +76,10 @@ private static final Logger LOGGER = LoggerFactory.getLogger(UserServiceImpl.cla
 
     	return users;
 	}
+
+	@Override
+	public void addUsers(List<User> users) {
+		LOGGER.info("User Service - addUsers. User.size : " + users.size());
+		mongoTemplate.insert(users, COLLECTION_NAME);
+	}
 }
