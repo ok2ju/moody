@@ -77,6 +77,6 @@ public class MoodyDevController {
             public String call() throws Exception {
                 return mapper.writeValueAsString(r.nextInt(500));
             }
-        }, 10, TimeUnit.SECONDS);
+        }, 3, TimeUnit.SECONDS);
 	}
 }

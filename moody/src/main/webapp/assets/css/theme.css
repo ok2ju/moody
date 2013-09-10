@@ -13,14 +13,21 @@ body {
   margin: 5px 0;
 }
 
+.info {
+	padding-top: 10px;
+	padding-bottom: 10px;
+	border-top: 1px solid #DDD;
+}
+
 .stats {
 	margin: 0 0 17px 0;
-	padding: 6px 0 15px 0;
+	padding: 10px 0 10px 0;
 	text-align: center;
 }
 
 ul.stats {
 	border-top: 1px solid #DDD;
+	border-bottom: 1px solid #DDD;
 }
 
 ul.stats li {

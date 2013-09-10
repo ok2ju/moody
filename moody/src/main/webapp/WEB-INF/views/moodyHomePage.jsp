@@ -37,14 +37,14 @@
 					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#">Bootstrap theme</a>
+				<a class="navbar-brand" href="#">Moody</a>
 			</div>
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
-					<li class="active"><a href="#">Home</a></li>
-					<li><a href="#about">About</a></li>
-					<li><a href="#contact">Contact</a></li>
-					<li class="dropdown"><a href="#" class="dropdown-toggle"
+					<li class="active"><a href="#"> Profile </a></li>
+					<li><a href="#about">Follower</a></li>
+					<li><a href="#contact">Messages<span class="badge" style="margin-left:3px;">14</span></a></li>
+					<li class="dropdown"><a hre	f="#" class="dropdown-toggle"
 						data-toggle="dropdown">Dropdown <b class="caret"></b></a>
 						<ul class="dropdown-menu">
 							<li><a href="#">Action</a></li>
@@ -52,8 +52,8 @@
 							<li><a href="#">Something else here</a></li>
 							<li class="divider"></li>
 							<li class="dropdown-header">Nav header</li>
-							<li><a href="#">Separated link</a></li>
-							<li><a href="#">One more separated link</a></li>
+							<li><a href="#">Settings</a></li>
+							<li><a href="#">Log out</a></li>
 						</ul></li>
 				</ul>
 			</div>
@@ -64,39 +64,110 @@
 	<div class="container theme-showcase">
 		<div class="row">
 			<div class="col-sm-4 col-md-3 col-lg-3">
-				<div class="avatared">
-					<img data-src="holder.js/200x200" src="data:image/png;base64,"
-						class="img-thumbnail"
-						alt="A generic square placeholder image with a white border around it, 
-						making it resemble a photograph taken with an old instant camera">
-					<h2>
-						<span class="name">${person.username}</span>
-					</h2>
-	
-					<ul class="stats" style="">
-						<li>
-							<a href="/OlegAtsman/followers"> 
-								<strong>1</strong>
-								<span>follower</span>
-							</a>
-						</li>
-						<li>
-							<a href="/stars"> 
-								<strong>6</strong> 
-								<span>starred</span>
-							</a>
-						</li>
-						<li>
-							<a href="/OlegAtsman/following"> 
-								<strong>1</strong>
-								<span>following</span>
-							</a>
-						</li>
-					</ul>
-					</div>
+				<img src="assets/img/0fyx_5tcwlI.jpg"
+					class="img-responsive"
+					alt="A generic square placeholder image with a white border around it, 
+					making it resemble a photograph taken with an old instant camera"
+					style="border: 1px solid #DDD;
+						   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);">
+					
+				<h2>
+					<span class="name">${person.username}</span>
+				</h2>
+				
+				<div class="info">
+					<span class="location">
+						Grodno, Belarus
+					</span>
+				</div>
+				
+				<ul class="stats" style="">
+					<li>
+						<a href="/OlegAtsman/followers"> 
+							<strong>1</strong>
+							<span>follower</span>
+						</a>
+					</li>
+					<li>
+						<a href="/stars"> 
+							<strong>6</strong> 
+							<span>starred</span>
+						</a>
+					</li>
+					<li>
+						<a href="/OlegAtsman/following"> 
+							<strong>1</strong>
+							<span>following</span>
+						</a>
+					</li>
+				</ul>
+				
 			</div>
+			
+			<div class="col-sm-8 col-md-8 col-lg-8	 col-md-offset-1">
+								
+				<div>
+					<h3>
+						Moody Time Line
+					</h3>
+				</div>					
+			    
+			    <div class="progress">
+					<div class="progress-bar progress-bar-success" style="width: 35%">
+						<span class="sr-only">35% Complete (success)</span>
+					</div>
+					<div class="progress-bar progress-bar-warning" style="width: 20%">
+						<span class="sr-only">20% Complete (warning)</span>
+					</div>
+					<div class="progress-bar progress-bar-danger" style="width: 10%">
+						<span class="sr-only">10% Complete (danger)</span>
+					</div>
+				</div>
+			</div>
+			
 		</div>
-
+		
+		<div class="row">
+			<div class="col-sm-4">
+				<ul class="list-group">
+					<li class="list-group-item">Cras justo odio</li>
+					<li class="list-group-item">Dapibus ac facilisis in</li>
+					<li class="list-group-item">Morbi leo risus</li>
+					<li class="list-group-item">Porta ac consectetur ac</li>
+					<li class="list-group-item">Vestibulum at eros</li>
+				</ul>
+			</div>
+			<!-- /.col-sm-4 -->
+			<div class="col-sm-4">
+				<div class="list-group">
+					<a href="#" class="list-group-item active"> Cras justo odio </a> <a href="#" class="list-group-item">Dapibus ac facilisis in</a> <a href="#" class="list-group-item">Morbi leo risus</a> <a href="#" class="list-group-item">Porta ac consectetur ac</a> <a href="#" class="list-group-item">Vestibulum at eros</a>
+				</div>
+			</div>
+			<!-- /.col-sm-4 -->
+			<div class="col-sm-4">
+				<div class="list-group">
+					<a href="#" class="list-group-item active">
+						<h4 class="list-group-item-heading">List group item heading</h4>
+						<p class="list-group-item-text">Donec id elit non mi porta
+							gravida at eget metus. Maecenas sed diam eget risus varius
+							blandit.</p>
+					</a> <a href="#" class="list-group-item">
+						<h4 class="list-group-item-heading">List group item heading</h4>
+						<p class="list-group-item-text">Donec id elit non mi porta
+							gravida at eget metus. Maecenas sed diam eget risus varius
+							blandit.</p>
+					</a> <a href="#" class="list-group-item">
+						<h4 class="list-group-item-heading">List group item heading</h4>
+						<p class="list-group-item-text">Donec id elit non mi porta
+							gravida at eget metus. Maecenas sed diam eget risus varius
+							blandit.</p>
+					</a>
+				</div>
+			</div>
+			<!-- /.col-sm-4 -->
+		</div>
+			
+	
 		<div class="page-header">
 			<h1>Dropdown menus</h1>
 		</div>
@@ -399,5 +470,6 @@
 	<script src="assets/js/bootstrap/bootstrap.min.js"></script>
 	<script src="assets/js/bootstrap/holder.js"></script>
 	<script src="assets/js/atmosphere/jquery.atmosphere.js"></script>
+	<script src="assets/js/atmosphere/moodyConnection.js"></script>
 </body>
 </html>
