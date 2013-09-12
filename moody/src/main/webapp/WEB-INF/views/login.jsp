@@ -2,9 +2,12 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Sign in &middot; Stock Trading Portfolio Sign in</title>
-  <link href="assets/css/bootstrap.css" rel="stylesheet">
-  <link href="assets/css/login.css" rel="stylesheet">
+	<title>Sign in &middot; Stock Trading Portfolio Sign in</title>
+	<!-- Bootstrap core CSS -->
+	<link href="assets/css/bootstrap.min.css" rel="stylesheet">
+	<!-- Bootstrap theme -->
+	<link href="assets/css/bootstrap-theme.min.css" rel="stylesheet">
+	<link href="assets/css/login/login.css" rel="stylesheet">
 </head>
 <body>
 
@@ -24,7 +27,7 @@
     </form>
   </div><!-- /container -->
 
-  <script src="assets/js/knockout-2.3.0.js"></script>
+  <script src="assets/js/bootstrap/knockout-2.3.0.js"></script>
 
   <script type="text/javascript">
     ko.applyBindings({

@@ -11,7 +11,6 @@ public class Smile {
 	
 	private String comment;
 	
-	
 	public Smile(SmileTypes smileType, Date data, String comment) {
 		super();
 		this.smileType = smileType;
@@ -46,7 +45,4 @@ public class Smile {
 	public void setComment(String comment) {
 		this.comment = comment;
 	}
-
-	
-	
 }

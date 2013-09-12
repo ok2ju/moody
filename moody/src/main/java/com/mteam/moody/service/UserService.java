@@ -1,5 +1,7 @@
 package com.mteam.moody.service;
 
+import static org.springframework.data.mongodb.core.query.Criteria.where;
+
 import java.util.List;
 import java.util.UUID;
 
@@ -9,17 +11,15 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 
-import static org.springframework.data.mongodb.core.query.Criteria.where;
-
 import com.mteam.moody.model.user.User;
  
 @Repository
-public class PersonService {
+public class UserService {
      
+	public static final String COLLECTION_NAME = "person";
+	
     @Autowired
     private MongoTemplate mongoTemplate;
-     
-    public static final String COLLECTION_NAME = "person";
     
     public void clean() {
     	mongoTemplate.dropCollection(COLLECTION_NAME);
@@ -28,16 +28,16 @@ public class PersonService {
     public void addPerson(User person) {
         if (!mongoTemplate.collectionExists(User.class)) {
             mongoTemplate.createCollection(User.class);
-        }       
+        }
         person.setId(UUID.randomUUID().toString());
         mongoTemplate.insert(person, COLLECTION_NAME);
     }
     
-    public List<User> findByName(String name) {
-    	Criteria criteria = where("username").is(name);
+    public List<User> findByUsername(String name) {
+    	Criteria criteria = where("name").is("oleg");
     	Query query = new Query(criteria);
     	List<User> users = mongoTemplate.find(query, User.class, COLLECTION_NAME);
-    	
+
     	return users;
     }
     

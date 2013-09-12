@@ -1,10 +1,10 @@
 package com.mteam.moody.model.user;
 
+import java.util.ArrayList;
 import java.util.List;
-
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-
+import com.mteam.moody.model.user.security.UserDetailsImpl;
 import com.mteam.moody.model.user.smile.Smile;
  
 @Document
@@ -13,14 +13,17 @@ public class User {
     @Id
     private String id;
     
-    private String username;
+    private String name = "oleg";
+        
+    private UserDetailsImpl userDetails;
     
     private List<Smile> smiles;
     
-    public User(String username) {
-    	this.username = username;
+    public User() {
+    	this.userDetails = new UserDetailsImpl();
+    	this.smiles = new ArrayList<Smile>();
     }
-
+    
 	public String getId() {
 		return id;
 	}
@@ -28,13 +31,17 @@ public class User {
 	public void setId(String id) {
 		this.id = id;
 	}
-
-	public String getUsername() {
-		return username;
+	
+	public String getName() {
+		return name;
 	}
-
-	public void setUsername(String username) {
-		this.username = username;
+	
+	public UserDetailsImpl getUserDetails() {
+		return userDetails;
+	}
+	
+	public void setUserDetails(UserDetailsImpl userDetails) {
+		this.userDetails = userDetails;
 	}
 
 	public List<Smile> getSmiles() {
@@ -43,7 +50,5 @@ public class User {
 
 	public void setSmiles(List<Smile> smiles) {
 		this.smiles = smiles;
-	}
-	
-	
+	}	
 }

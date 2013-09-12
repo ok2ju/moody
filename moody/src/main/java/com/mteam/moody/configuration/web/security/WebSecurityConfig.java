@@ -5,6 +5,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
+import com.mteam.moody.security.MoodyAuthenticationProvider;
+
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
@@ -21,18 +23,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.permitAll()
 				.and()
 			.formLogin()
-				.defaultSuccessUrl("/async")
-				.loginUrl("/login")
+				.defaultSuccessUrl("/index.html")
+				.loginUrl("/login.html")
 				.failureUrl("/login.html?error")
 				.permitAll();
 	}
 
 	@Override
-	protected void registerAuthentication(AuthenticationManagerBuilder auth)
-			throws Exception {
-		auth
-			.inMemoryAuthentication()
-				.withUser("user").password("user").roles("USER").and()
-				.withUser("admin").password("admin").roles("ADMIN","USER");
+	protected void registerAuthentication(AuthenticationManagerBuilder auth) throws Exception {
+		auth.userDetailsService(new MoodyAuthenticationProvider());
 	}
 }
