@@ -1,20 +1,24 @@
 package com.mteam.moody.configuration.web.security;
 
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
-import com.mteam.moody.security.MoodyAuthenticationProvider;
+import com.mteam.moody.service.UserService;
 
+@Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-
+	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
 			.authorizeUrls()
-				.antMatchers("/**").permitAll()
+				.antMatchers("/assets/**").permitAll()
 				.anyRequest().authenticated()
 				.and()
 			.logout()
@@ -28,9 +32,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.failureUrl("/login.html?error")
 				.permitAll();
 	}
-
-	@Override
-	protected void registerAuthentication(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(new MoodyAuthenticationProvider());
+	
+	@Bean
+	protected UserDetailsService userDetailsService() {
+		return new UserService();
 	}
+	
 }

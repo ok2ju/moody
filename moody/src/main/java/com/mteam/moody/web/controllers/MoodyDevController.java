@@ -88,7 +88,7 @@ public class MoodyDevController {
 		
 		testUser.getUserDetails().setAuthorities(auth);
 		personService.addPerson(testUser);
-		model.addAttribute("person", personService.findByUsername("olegatsman").get(0));
+		model.addAttribute("person", personService.findByUsername("olegatsman"));
 		return "moodyHomePage";
 	}
 	
