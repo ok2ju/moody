@@ -8,28 +8,28 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.core.GrantedAuthority;
 
 import com.mteam.moody.app.model.user.security.UserDetailsImpl;
-import com.mteam.moody.app.model.user.smile.Smile;
+import com.mteam.moody.app.model.user.status.Status;
  
 @Document
 public class User {
  
     @Id
     private String id;
-    
-    private String name = "oleg";
         
     private UserDetailsImpl userDetails;
     
-    private List<Smile> smiles;
+    private List<Status> statuses;
+    
+    private List<Follower> followers;
     
     public User() {
     	this.userDetails = new UserDetailsImpl();
-    	this.smiles = new ArrayList<Smile>();
+    	this.setStatuses(new ArrayList<Status>());
     }
     
     public User(String username, String password, List<GrantedAuthority> authorities) {
     	this.userDetails = new UserDetailsImpl(username, password, authorities);
-    	this.smiles = new ArrayList<Smile>();
+    	this.setStatuses(new ArrayList<Status>());
     }
     
 	public String getId() {
@@ -40,10 +40,6 @@ public class User {
 		this.id = id;
 	}
 	
-	public String getName() {
-		return name;
-	}
-	
 	public UserDetailsImpl getUserDetails() {
 		return userDetails;
 	}
@@ -52,11 +48,11 @@ public class User {
 		this.userDetails = userDetails;
 	}
 
-	public List<Smile> getSmiles() {
-		return smiles;
+	public List<Status> getStatuses() {
+		return statuses;
 	}
 
-	public void setSmiles(List<Smile> smiles) {
-		this.smiles = smiles;
-	}	
+	public void setStatuses(List<Status> statuses) {
+		this.statuses = statuses;
+	}
 }

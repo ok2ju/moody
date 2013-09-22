@@ -1,12 +1,12 @@
 package com.mteam.moody.app.web.controllers;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import java.util.Random;
 import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
-
-import javax.servlet.ServletRequest;
 
 import org.atmosphere.cpr.AtmosphereResource;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -24,6 +24,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mteam.moody.app.model.user.User;
 import com.mteam.moody.app.model.user.security.MoodyGrantedAuthority;
+import com.mteam.moody.app.model.user.status.SmileTypes;
+import com.mteam.moody.app.model.user.status.Status;
 import com.mteam.moody.app.service.UserService;
 import com.mteam.moody.app.web.asynchronous.AsynchronousService;
 
@@ -98,6 +100,9 @@ public class MoodyDevController {
 		auth.add(userRole);
 		
 		User oleg = new User("oleg", "oleg", auth);
+		List<Status> s = new ArrayList<Status>();
+		s.add(new Status(SmileTypes.BAD, new Date(), "OLOLO TEST STATUS"));
+		oleg.setStatuses(s);
 		User anton = new User("anton", "anton", auth);
 		User lesha2 = new User("lesha2", "lesha2", auth);
 		users.add(oleg);

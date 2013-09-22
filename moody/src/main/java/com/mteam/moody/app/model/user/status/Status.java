@@ -1,20 +1,19 @@
-package com.mteam.moody.app.model.user.smile;
+package com.mteam.moody.app.model.user.status;
 
 import java.util.Date;
 
-
-public class Smile {
+public class Status {
 	
 	private SmileTypes smileType;
 	
-	private Date data;
+	private Date date;
 	
 	private String comment;
 	
-	public Smile(SmileTypes smileType, Date data, String comment) {
+	public Status(SmileTypes smileType, Date date, String comment) {
 		super();
 		this.smileType = smileType;
-		this.data = data;
+		this.date = date;
 		this.comment = comment;
 	}
 
@@ -31,11 +30,11 @@ public class Smile {
 	}
 
 	public Date getData() {
-		return data;
+		return date;
 	}
 
 	public void setData(Date data) {
-		this.data = data;
+		this.date = data;
 	}
 
 	public String getComment() {
