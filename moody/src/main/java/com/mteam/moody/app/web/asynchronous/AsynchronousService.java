@@ -1,4 +1,4 @@
-package com.mteam.moody.web.asynchronous;
+package com.mteam.moody.app.web.asynchronous;
 
 import java.util.Collection;
 

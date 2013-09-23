@@ -1,4 +1,4 @@
-package com.mteam.moody.model.user.security;
+package com.mteam.moody.app.model.user.security;
 
 import org.springframework.security.core.GrantedAuthority;
 

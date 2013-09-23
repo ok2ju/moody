@@ -1,4 +1,4 @@
-package com.mteam.moody.model.user.smile;
+package com.mteam.moody.app.model.user.smile;
 
 import java.util.Date;
 

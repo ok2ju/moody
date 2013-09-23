@@ -1,4 +1,4 @@
-package com.mteam.moody.model.user.security;
+package com.mteam.moody.app.model.user.security;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -27,19 +27,27 @@ public class UserDetailsImpl implements UserDetails, Serializable {
 	private List<GrantedAuthority> authorities;
 	
 	public UserDetailsImpl() {
-		
+		this.accountNonExpired = true;
+		this.accountNonLocked = true;
+		this.credentialsNonExpired = true;
+		this.enabled = true;
+	}
+	
+	public UserDetailsImpl(String username, String password, List<GrantedAuthority> authorities) {
+		this();
+		this.username = username;
+		this.password = password;
+		this.authorities = authorities;
 	}
 	
 	public UserDetailsImpl(String username, String password, boolean accountNonExpired, 
-			boolean accountNonLocked, boolean credentialsNonExpired, boolean enabled, ArrayList<GrantedAuthority> authorities) {
-		super();
-		this.username = username;
-		this.password = password;
+			boolean accountNonLocked, boolean credentialsNonExpired, boolean enabled, List<GrantedAuthority> authorities) {
+		this(username, password, authorities);		
 		this.accountNonExpired = accountNonExpired;
 		this.accountNonLocked = accountNonLocked;
 		this.credentialsNonExpired = credentialsNonExpired;
 		this.enabled = enabled;
-		this.authorities = authorities;
+		
 	}
 
 	@Override

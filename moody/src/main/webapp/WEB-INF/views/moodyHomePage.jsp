@@ -72,7 +72,7 @@
 						   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);">
 					
 				<h2>
-					<span class="name">${person.username}</span>
+					<span class="name">${person.userDetails.username}</span>
 				</h2>
 				
 				<div class="info">

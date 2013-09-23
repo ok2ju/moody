@@ -1,22 +1,18 @@
 package com.mteam.moody.configuration.web.security;
 
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.ImportResource;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.UserDetailsService;
 
-import com.mteam.moody.service.UserService;
-
-@Configuration
 @EnableWebSecurity
+@ImportResource({"/WEB-INF/config/security.xml"})
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http
-			.authorizeUrls()
+		http.csrf().disable()
+			.authorizeRequests()
 				.antMatchers("/assets/**").permitAll()
 				.anyRequest().authenticated()
 				.and()
@@ -27,14 +23,23 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.and()
 			.formLogin()
 				.defaultSuccessUrl("/index.html")
-				.loginUrl("/login.html")
+				.loginPage("/login.html")
 				.failureUrl("/login.html?error")
 				.permitAll();
 	}
 	
-	@Bean
-	protected UserDetailsService userDetailsService() {
-		return new UserService();
+	/*@Override
+	protected void registerAuthentication(AuthenticationManagerBuilder auth) throws Exception {
+		auth.inMemoryAuthentication().withUser("oleg").password("oleg").roles("USER");
+	}*/
+	
+	/*@Bean
+	protected AuthenticationManager authenticationManager() throws Exception {
+		return (AuthenticationManager) new AuthenticationManagerBuilder().userDetailsService(userDetailsService()).and().build();
 	}
 	
+	@Bean(name="myUserDetailsService")
+	protected UserDetailsService userDetailsService() {
+		return new UserDetailsServiceImpl();
+	}*/
 }

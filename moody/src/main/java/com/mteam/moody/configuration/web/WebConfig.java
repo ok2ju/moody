@@ -21,7 +21,7 @@ import com.mteam.moody.configuration.web.resolvers.AtmosphereArgumentResolver;
 @Configuration
 @EnableWebMvc
 @EnableScheduling
-@ComponentScan(basePackages = "com.mteam.moody")
+@ComponentScan(basePackages = "com.mteam.moody.app.web")
 public class WebConfig extends WebMvcConfigurerAdapter {
 	
 	@Override

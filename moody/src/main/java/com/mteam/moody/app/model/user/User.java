@@ -1,11 +1,14 @@
-package com.mteam.moody.model.user;
+package com.mteam.moody.app.model.user;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import com.mteam.moody.model.user.security.UserDetailsImpl;
-import com.mteam.moody.model.user.smile.Smile;
+import org.springframework.security.core.GrantedAuthority;
+
+import com.mteam.moody.app.model.user.security.UserDetailsImpl;
+import com.mteam.moody.app.model.user.smile.Smile;
  
 @Document
 public class User {
@@ -21,6 +24,11 @@ public class User {
     
     public User() {
     	this.userDetails = new UserDetailsImpl();
+    	this.smiles = new ArrayList<Smile>();
+    }
+    
+    public User(String username, String password, List<GrantedAuthority> authorities) {
+    	this.userDetails = new UserDetailsImpl(username, password, authorities);
     	this.smiles = new ArrayList<Smile>();
     }
     
