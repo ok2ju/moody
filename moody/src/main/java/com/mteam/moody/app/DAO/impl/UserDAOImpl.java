@@ -29,42 +29,38 @@ public class UserDAOImpl implements UserDAO {
 
 	@Override
 	public void cleanCollection() {
-		LOGGER.info("User Service - cleanCollection: " + COLLECTION_NAME);
-    	mongoTemplate.dropCollection(COLLECTION_NAME);
+
 	}
 
 	@Override
 	public void saveUser(User user) {
 		LOGGER.info("User Service - addUser: " + user.getUsername());
-		if (!mongoTemplate.collectionExists(User.class)) {
-            mongoTemplate.createCollection(User.class);
-        }
-        mongoTemplate.insert(user, COLLECTION_NAME);
+        mongoTemplate.save(user);
 	}
 
 	@Override
 	public List<User> listUsers() {
 		LOGGER.info("User Service - listUsers");
-		return mongoTemplate.findAll(User.class, COLLECTION_NAME);
+		return mongoTemplate.findAll(User.class);
 	}
 
 	@Override
 	public void removeUser(User user) {
 		LOGGER.info("User Service - deleteUser");
-		mongoTemplate.remove(user, COLLECTION_NAME);
+		mongoTemplate.remove(user);
 	}
 
 	@Override
 	public void removeUser(String username) {
 		LOGGER.info("User Service - deleteUserByUserName: " + username);
 		User user = findUserByUsername(username);
-		mongoTemplate.remove(user, COLLECTION_NAME);
+		mongoTemplate.remove(user);
 	}
 
 	@Override
 	public void updateUser(User user) {
 		LOGGER.info("User Service - updateUser username: " + user.getUsername());
-		mongoTemplate.save(user, COLLECTION_NAME);
+		mongoTemplate.save(user);
 	}
 
 	@Override
@@ -73,7 +69,7 @@ public class UserDAOImpl implements UserDAO {
     	LOGGER.info("Mongotemplate : " + mongoTemplate);
 		Criteria criteria = where("username").is(username);
     	Query query = new Query(criteria);
-    	User users = mongoTemplate.findOne(query, User.class, COLLECTION_NAME);
+    	User users = mongoTemplate.findOne(query, User.class);
 
     	return users;
 	}
@@ -81,6 +77,6 @@ public class UserDAOImpl implements UserDAO {
 	@Override
 	public void saveUsers(List<User> users) {
 		LOGGER.info("User Service - addUsers. User.size : " + users.size());
-		mongoTemplate.insert(users, COLLECTION_NAME);
+		mongoTemplate.insert(users);
 	}
 }

@@ -21,14 +21,14 @@ public class StatusesDAOImpl implements StatusesDAO {
 	
 	@Override
 	public void saveStatus(Status status) {
-		mongoTemplate.save(status, COLLECTION_NAME);
+		mongoTemplate.save(status);
 	}
 
 	@Override
 	public Status findStatuseById(String statusId) {
 		Criteria criteria = where("id").is(statusId);
     	Query query = new Query(criteria);
-    	Status status = mongoTemplate.findOne(query, Status.class, COLLECTION_NAME);
+    	Status status = mongoTemplate.findOne(query, Status.class);
     	return status;
 	}
 
@@ -36,7 +36,7 @@ public class StatusesDAOImpl implements StatusesDAO {
 	public List<Status> findStatusesByUserId(String userId) {
 		Criteria criteria = where("userId").is(userId);
     	Query query = new Query(criteria);
-    	List<Status> statuses = mongoTemplate.find(query, Status.class, COLLECTION_NAME);
+    	List<Status> statuses = mongoTemplate.find(query, Status.class);
     	return statuses;
 	}
 
@@ -44,6 +44,6 @@ public class StatusesDAOImpl implements StatusesDAO {
 	public void removeStatus(String statusId) {
 		Criteria criteria = where("id").is(statusId);
     	Query query = new Query(criteria);
-		mongoTemplate.remove(query, Status.class, COLLECTION_NAME);
+		mongoTemplate.remove(query, Status.class);
 	}
 }

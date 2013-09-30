@@ -6,8 +6,6 @@ import com.mteam.moody.app.model.user.User;
 
 public interface UserDAO {
 	
-	public static final String COLLECTION_NAME = "person";
-	
 	public void cleanCollection();
 	
 	public void saveUser(User user);

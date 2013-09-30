@@ -6,8 +6,6 @@ import com.mteam.moody.app.model.status.Status;
 
 public interface StatusesDAO {
 	
-	public static final String COLLECTION_NAME = "statuses";
-	
 	public void saveStatus(Status status);
 	
 	public Status findStatuseById(String statusId);

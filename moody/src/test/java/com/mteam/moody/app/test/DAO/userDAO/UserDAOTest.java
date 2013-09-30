@@ -2,7 +2,6 @@ package com.mteam.moody.app.test.DAO.userDAO;
 
 import java.util.ArrayList;
 
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -27,6 +26,7 @@ public class UserDAOTest {
 	
 	@Before
 	public void before() {
+		userDAO.cleanCollection();
 		ArrayList<GrantedAuthority> auth = new ArrayList<GrantedAuthority>();
 		MoodyGrantedAuthority userRole = new MoodyGrantedAuthority("USER");
 		auth.add(userRole);
@@ -35,13 +35,25 @@ public class UserDAOTest {
 	}
 	
 	@Test
+	public void unicUsersTest() {
+		ArrayList<GrantedAuthority> auth = new ArrayList<GrantedAuthority>();
+		MoodyGrantedAuthority userRole = new MoodyGrantedAuthority("USER");
+		auth.add(userRole);
+		User testuser1 = new User("testuser1", "testpass1", auth);
+		
+		ArrayList<GrantedAuthority> auth2 = new ArrayList<GrantedAuthority>();
+		MoodyGrantedAuthority userRole2 = new MoodyGrantedAuthority("USER");
+		auth.add(userRole);
+		User testuser2 = new User("testuser1", "testpass2", auth);
+		
+		userDAO.saveUser(testuser1);
+		userDAO.saveUser(testuser2);
+		userDAO.findUserByUsername("testuser1");
+	}
+	
+	@Test
 	public void testSaveUser() {
 		User retriveUser = userDAO.findUserByUsername("testuser1");
 		Assert.assertNotNull("retriveUser is null", retriveUser);
-	}
-	
-	@After
-	public void after() {
-		userDAO.removeUser("testuser1");
 	}
 }

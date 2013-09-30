@@ -18,14 +18,14 @@ public class FollowerDAOImpl implements FollowerDAO {
 
 	@Override
 	public void saveFollower(Follower follower) {
-		mongoTemplate.save(follower, COLLECTION_NAME);
+		mongoTemplate.save(follower);
 	}
 
 	@Override
 	public Follower findFollowersByUserId(String userId) {
 		Criteria criteria = where("userId").is(userId);
     	Query query = new Query(criteria);
-    	Follower follower = mongoTemplate.findOne(query, Follower.class, COLLECTION_NAME);
+    	Follower follower = mongoTemplate.findOne(query, Follower.class);
     	return follower;
 	}
 

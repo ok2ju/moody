@@ -6,11 +6,10 @@ import java.util.List;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
  
-@Document
+@Document(collection = "users")
 public class User implements UserDetails, Serializable {
     
 	private static final long serialVersionUID = -5352190150622244640L;
@@ -18,13 +17,11 @@ public class User implements UserDetails, Serializable {
 	@Id
     private String id;
 	
-	@Field(value = "username")
-	@Indexed(unique = true)
+	@Indexed(unique=true)
 	private String username;
 	
 	private String password;
 	
-	@Field("email")
 	@Indexed(unique = true)
 	private String email;
 	
