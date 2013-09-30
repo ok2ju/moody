@@ -5,13 +5,19 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+@Document
 public class UserDetailsImpl implements UserDetails, Serializable {
 	
 	private static final long serialVersionUID = 2385590642110243009L;
 
+	@Field
+	@Indexed(unique = true)
 	private String username;
 	
 	private String password;

@@ -1,7 +1,12 @@
-package com.mteam.moody.app.model.user.status;
+package com.mteam.moody.app.model.status;
 
 import java.util.Date;
 
+/**
+ * Comments can be added by another peoples to some statuses.
+ * @author Aleh_Atsman
+ *
+ */
 public class Comment {
 	
 	private String author;

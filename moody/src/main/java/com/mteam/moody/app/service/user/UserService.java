@@ -1,18 +1,18 @@
 package com.mteam.moody.app.service.user;
 
+import com.mteam.moody.app.model.status.Status;
 import com.mteam.moody.app.model.user.User;
-import com.mteam.moody.app.model.user.status.Status;
 
 
 public interface UserService {
 	
-	public void addStatus(User user, Status status);
+	public void addStatus(Status status);
 	
 	public void removeStatus(String statusId);
 	
-	public void follow(String userId);
+	public void follow(String userId, String followId);
 	
-	public void unFollow(String userId);
+	public void unFollow(String userId, String followId);
 	
 	public User findUserByUsername(String username);
 	

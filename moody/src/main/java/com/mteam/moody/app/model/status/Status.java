@@ -1,9 +1,8 @@
-package com.mteam.moody.app.model.user.status;
+package com.mteam.moody.app.model.status;
 
 import java.util.Date;
 import java.util.List;
 
-import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -11,13 +10,13 @@ import org.springframework.data.mongodb.core.mapping.Document;
  * Status. Every prsons post theirs statuses: text, smile, tags.
  * @author Oleg Atsman
  */
-@Document
+@Document(collection = "statuses")
 public class Status {
 	
 	@Id
-    private Object id = new ObjectId();
+    private String id;
 	
-	private String author;
+	private String userId;
 	
 	private Date date;
 	
@@ -29,28 +28,32 @@ public class Status {
 	
 	private List<Comment> comments;
 
-	public Status(String author, Date date, String text, SmileTypes smileType) {
+	public Status(String userId, Date date, String text, SmileTypes smileType) {
 		super();
-		this.author = author;
+		this.userId = userId;
 		this.date = date;
 		this.text = text;
 		this.smileType = smileType;
 	}
 
-	public Object getId() {
+	public void addComment(Comment comment) {
+		comments.add(comment);
+	}
+	
+	public void removeComment(Comment comment) {
+		comments.remove(comment);
+	}
+	
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Object id) {
-		this.id = id;
-	}
-
 	public String getAuthor() {
-		return author;
+		return userId;
 	}
 
-	public void setAuthor(String author) {
-		this.author = author;
+	public void setAuthor(String userId) {
+		this.userId = userId;
 	}
 
 	public Date getDate() {
@@ -92,5 +95,4 @@ public class Status {
 	public void setComments(List<Comment> comments) {
 		this.comments = comments;
 	}
-	
 }

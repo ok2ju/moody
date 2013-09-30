@@ -1,8 +1,6 @@
 package com.mteam.moody.app.web.controllers.anonym;
 
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 
 import org.slf4j.Logger;
@@ -16,8 +14,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.mteam.moody.app.model.user.User;
 import com.mteam.moody.app.model.user.security.MoodyGrantedAuthority;
-import com.mteam.moody.app.model.user.status.SmileTypes;
-import com.mteam.moody.app.model.user.status.Status;
 import com.mteam.moody.app.service.anonym.AnonymService;
 
 @Controller
@@ -37,11 +33,8 @@ public class AnonymUserController {
 		auth.add(userRole);
 		
 		User oleg = new User("oleg", "oleg", auth);
-		List<Status> s = new ArrayList<Status>();
-		s.add(new Status("oleg", new Date(), "OLOLO TEST STATUS", SmileTypes.BAD));
-		oleg.setStatuses(s);
-
 		anonymService.registerUser(oleg);
+		
 		return "home";
 	}
 }

@@ -19,7 +19,7 @@ public class AnonymServiceImpl implements AnonymService {
 	
 	@Override
 	public void registerUser(User user) {
-		LOGGER.info("Register user: " + user.getUserDetails().getUsername());
+		LOGGER.info("Register user: " + user.getUsername());
 		userDAO.saveUser(user);
 	}
 

@@ -35,7 +35,7 @@ public class UserDAOImpl implements UserDAO {
 
 	@Override
 	public void saveUser(User user) {
-		LOGGER.info("User Service - addUser: " + user.getUserDetails().getUsername());
+		LOGGER.info("User Service - addUser: " + user.getUsername());
 		if (!mongoTemplate.collectionExists(User.class)) {
             mongoTemplate.createCollection(User.class);
         }
@@ -49,29 +49,29 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	@Override
-	public void deleteUser(User user) {
+	public void removeUser(User user) {
 		LOGGER.info("User Service - deleteUser");
 		mongoTemplate.remove(user, COLLECTION_NAME);
 	}
 
 	@Override
-	public void deleteUser(String username) {
+	public void removeUser(String username) {
 		LOGGER.info("User Service - deleteUserByUserName: " + username);
-		User user = findByUsername(username);
+		User user = findUserByUsername(username);
 		mongoTemplate.remove(user, COLLECTION_NAME);
 	}
 
 	@Override
 	public void updateUser(User user) {
-		LOGGER.info("User Service - updateUser username: " + user.getUserDetails().getUsername());
+		LOGGER.info("User Service - updateUser username: " + user.getUsername());
 		mongoTemplate.save(user, COLLECTION_NAME);
 	}
 
 	@Override
-	public User findByUsername(String username) {
-		LOGGER.info("User Service - findByUsername name: " + username + "mongoTemplate: " + mongoTemplate);
+	public User findUserByUsername(String username) {
+		LOGGER.info("User Service - findByUsername name: " + username + " mongoTemplate: " + mongoTemplate);
     	LOGGER.info("Mongotemplate : " + mongoTemplate);
-		Criteria criteria = where("userDetails.username").is(username);
+		Criteria criteria = where("username").is(username);
     	Query query = new Query(criteria);
     	User users = mongoTemplate.findOne(query, User.class, COLLECTION_NAME);
 
