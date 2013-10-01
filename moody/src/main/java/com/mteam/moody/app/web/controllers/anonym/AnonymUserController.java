@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.mteam.moody.app.model.user.User;
 import com.mteam.moody.app.model.user.security.MoodyGrantedAuthority;
-import com.mteam.moody.app.service.anonym.AnonymService;
+import com.mteam.moody.app.service.anonym.RegisterService;
 
 @Controller
 public class AnonymUserController {
@@ -22,7 +22,7 @@ public class AnonymUserController {
 	private static final Logger LOGGER = LoggerFactory.getLogger(AnonymUserController.class);
 	
 	@Autowired
-	private AnonymService anonymService;
+	private RegisterService anonymService;
 	
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {

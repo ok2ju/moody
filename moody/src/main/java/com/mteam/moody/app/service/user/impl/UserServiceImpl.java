@@ -1,5 +1,7 @@
 package com.mteam.moody.app.service.user.impl;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,7 @@ import com.mteam.moody.app.DAO.FollowerDAO;
 import com.mteam.moody.app.DAO.FollowingDAO;
 import com.mteam.moody.app.DAO.StatusesDAO;
 import com.mteam.moody.app.DAO.UserDAO;
+import com.mteam.moody.app.model.follow.FollowModel;
 import com.mteam.moody.app.model.follow.Follower;
 import com.mteam.moody.app.model.follow.Following;
 import com.mteam.moody.app.model.status.Status;
@@ -47,7 +50,8 @@ public class UserServiceImpl implements UserService {
 		Following following = followingDAO.findFollowingByUserId(userId);
 		following.follow(followId);
 		Follower follower = followerDAO.findFollowersByUserId(followId);
-		follower.addFollower(userId);
+		FollowModel followModel = new FollowModel(followId, false);
+		follower.addFollower(followModel);
 		followerDAO.saveFollower(follower);
 		followingDAO.saveFollowing(following);
 	}
@@ -61,9 +65,29 @@ public class UserServiceImpl implements UserService {
 		followerDAO.saveFollower(follower);
 		followingDAO.saveFollowing(following);
 	}
-
+	
 	@Override
 	public User findUserByUsername(String username) {
 		return userDAO.findUserByUsername(username);		
+	}
+
+	@Override
+	public User findUserByUserId(String userId) {
+		return userDAO.findUserByUserid(userId);
+	}
+
+	@Override
+	public Follower findFollower(String userId) {
+		return followerDAO.findFollowersByUserId(userId);
+	}
+
+	@Override
+	public Following findFollowing(String userId) {
+		return followingDAO.findFollowingByUserId(userId);
+	}
+
+	@Override
+	public List<Status> findStatusesByUserId(String userId) {
+		return statusesDAO.findStatusesByUserId(userId);
 	}
 }

@@ -1,20 +1,18 @@
 package com.mteam.moody.app.web.controllers.user;
 
-import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.mteam.moody.app.model.follow.Follower;
+import com.mteam.moody.app.model.follow.Following;
+import com.mteam.moody.app.model.status.Status;
 import com.mteam.moody.app.model.user.User;
-import com.mteam.moody.app.model.user.security.UserDetailsImpl;
-import com.mteam.moody.app.model.user.status.SmileTypes;
-import com.mteam.moody.app.model.user.status.Status;
 import com.mteam.moody.app.service.user.UserService;
 
 @Controller
@@ -24,7 +22,17 @@ public class BaseUserController {
 	@Autowired
 	private UserService userService;
 	
-	@RequestMapping(value = "/addstatus", method = RequestMethod.POST)
+	@RequestMapping(value = "/{userId}", method = RequestMethod.GET)
+	public String home(@PathVariable String userId) {
+		User user = userService.findUserByUserId(userId);
+		Follower follower = userService.findFollower(userId);
+		Following following = userService.findFollowing(userId);
+		List<Status> statuses = userService.findStatusesByUserId(userId);
+		
+		return "home";
+	}
+	
+	/*@RequestMapping(value = "/addstatus", method = RequestMethod.POST)
 	public String addStatus(@ModelAttribute("status")Status status) {
 		UserDetailsImpl userDetails = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		User user = userService.findUserByUsername(userDetails.getUsername());
@@ -40,6 +48,6 @@ public class BaseUserController {
 		
 		userService.addStatus(user, status);
 		return "login";
-	}
+	}*/
 	
 }

@@ -5,12 +5,16 @@ import java.util.List;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
+import com.mteam.moody.app.model.follow.Follower;
+import com.mteam.moody.app.model.follow.Following;
  
-@Document(collection = "users")
-public class User implements UserDetails, Serializable {
+@Document(collection = "usersDbRef")
+public class UserDbRef implements UserDetails, Serializable {
     
 	private static final long serialVersionUID = -5352190150622244640L;
 
@@ -25,6 +29,12 @@ public class User implements UserDetails, Serializable {
 	@Indexed(unique = true)
 	private String email;
 	
+	@DBRef
+	private Follower follower;
+	
+	@DBRef
+	private Following following;
+	
 	private boolean accountNonExpired;
 	
 	private boolean accountNonLocked;
@@ -35,14 +45,14 @@ public class User implements UserDetails, Serializable {
 	
 	private List<GrantedAuthority> authorities;
 	
-	public User() {
+	public UserDbRef() {
 		this.accountNonExpired = true;
 		this.accountNonLocked = true;
 		this.credentialsNonExpired = true;
 		this.enabled = true;
 	}
 	
-	public User(String username, String password, String email, List<GrantedAuthority> authorities) {
+	public UserDbRef(String username, String password, String email, List<GrantedAuthority> authorities) {
 		this();
 		this.username = username;
 		this.password = password;
@@ -116,5 +126,21 @@ public class User implements UserDetails, Serializable {
 
 	public void setAuthorities(List<GrantedAuthority> authorities) {
 		this.authorities = authorities;
+	}
+
+	public Follower getFollower() {
+		return follower;
+	}
+
+	public void setFollower(Follower follower) {
+		this.follower = follower;
+	}
+
+	public Following getFollowing() {
+		return following;
+	}
+
+	public void setFollowing(Following following) {
+		this.following = following;
 	}
 }

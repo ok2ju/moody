@@ -15,6 +15,7 @@ import org.springframework.stereotype.Repository;
 import com.mteam.moody.app.DAO.UserDAO;
 import com.mteam.moody.app.model.user.User;
 
+
 @Repository
 public class UserDAOImpl implements UserDAO {
 	
@@ -78,5 +79,13 @@ public class UserDAOImpl implements UserDAO {
 	public void saveUsers(List<User> users) {
 		LOGGER.info("User Service - addUsers. User.size : " + users.size());
 		mongoTemplate.insert(users);
+	}
+
+	@Override
+	public User findUserByUserid(String userId) {
+		Criteria whereUserIdIsId = where("id").is(userId);
+    	Query query = new Query(whereUserIdIsId);
+    	User user = mongoTemplate.findOne(query, User.class);
+		return user;
 	}
 }

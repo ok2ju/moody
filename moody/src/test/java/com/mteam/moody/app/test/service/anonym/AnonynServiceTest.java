@@ -16,14 +16,14 @@ import org.springframework.test.context.support.AnnotationConfigContextLoader;
 import com.mteam.moody.app.DAO.UserDAO;
 import com.mteam.moody.app.model.user.User;
 import com.mteam.moody.app.model.user.security.MoodyGrantedAuthority;
-import com.mteam.moody.app.service.anonym.AnonymService;
+import com.mteam.moody.app.service.anonym.RegisterService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(loader = AnnotationConfigContextLoader.class, classes = {TestConfig.class})
 public class AnonynServiceTest {
 	
 	@Autowired
-	private AnonymService anonymService;
+	private RegisterService anonymService;
 	
 	@Autowired
 	private UserDAO userDAO;

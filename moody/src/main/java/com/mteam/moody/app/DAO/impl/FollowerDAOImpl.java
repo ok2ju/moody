@@ -1,10 +1,11 @@
 package com.mteam.moody.app.DAO.impl;
 
 import static org.springframework.data.mongodb.core.query.Criteria.where;
-import org.springframework.data.mongodb.core.query.Query;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 
 import com.mteam.moody.app.DAO.FollowerDAO;
@@ -23,10 +24,9 @@ public class FollowerDAOImpl implements FollowerDAO {
 
 	@Override
 	public Follower findFollowersByUserId(String userId) {
-		Criteria criteria = where("userId").is(userId);
-    	Query query = new Query(criteria);
+		Criteria whereUserIdIsId = where("userId").is(userId);
+    	Query query = new Query(whereUserIdIsId);
     	Follower follower = mongoTemplate.findOne(query, Follower.class);
     	return follower;
 	}
-
 }

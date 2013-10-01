@@ -1,8 +1,5 @@
 package com.mteam.moody.app.web.controllers;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 import java.util.Random;
 import java.util.concurrent.Callable;
@@ -13,19 +10,12 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.mteam.moody.app.model.user.User;
-import com.mteam.moody.app.model.user.security.MoodyGrantedAuthority;
-import com.mteam.moody.app.model.user.status.SmileTypes;
-import com.mteam.moody.app.model.user.status.Status;
 import com.mteam.moody.app.service.user.UserService;
 import com.mteam.moody.app.web.asynchronous.AsynchronousService;
 

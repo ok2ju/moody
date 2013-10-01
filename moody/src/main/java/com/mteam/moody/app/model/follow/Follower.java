@@ -16,21 +16,21 @@ public class Follower {
 	@Indexed(unique = true)
 	private String userId;
 	
-	private List<String> followers;
+	private List<FollowModel> followers;
 	
 	public Follower(String userId) {
 		this.userId = userId;
-		this.followers = new ArrayList<String>();
+		this.followers = new ArrayList<FollowModel>();
 	}
 
-	public Follower(String userId, List<String> followers) {
+	public Follower(String userId, List<FollowModel> followers) {
 		super();
 		this.userId = userId;
 		this.followers = followers;
 	}
 	
-	public void addFollower(String followerId) {
-		followers.add(followerId);
+	public void addFollower(FollowModel follower) {
+		followers.add(follower);
 	}
 	
 	public void removeFollower(String followerId) {
@@ -49,11 +49,11 @@ public class Follower {
 		this.userId = userId;
 	}
 
-	public List<String> getFollowers() {
+	public List<FollowModel> getFollowers() {
 		return followers;
 	}
 
-	public void setFollowers(List<String> followers) {
+	public void setFollowers(List<FollowModel> followers) {
 		this.followers = followers;
 	}
 }
