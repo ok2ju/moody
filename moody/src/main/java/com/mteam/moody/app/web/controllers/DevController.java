@@ -26,16 +26,16 @@ import com.mteam.moody.app.model.user.User;
 import com.mteam.moody.app.model.user.security.MoodyGrantedAuthority;
 import com.mteam.moody.app.model.user.status.SmileTypes;
 import com.mteam.moody.app.model.user.status.Status;
-import com.mteam.moody.app.service.UserService;
+import com.mteam.moody.app.service.user.UserService;
 import com.mteam.moody.app.web.asynchronous.AsynchronousService;
 
 /**
  * Handles requests for the application home page.
  */
 @Controller
-public class MoodyDevController {
+public class DevController {
 	
-	private static final Logger LOGGER = LoggerFactory.getLogger(MoodyDevController.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(DevController.class);
 	
 	private final ObjectMapper mapper = new ObjectMapper();
 	
@@ -54,21 +54,21 @@ public class MoodyDevController {
 		return "home";
 	}
 	
-	@RequestMapping(value = "/fillDB", method = RequestMethod.GET)
+	/*@RequestMapping(value = "/fillDB", method = RequestMethod.GET)
 	public String fillBDMethod() {
 		fillBD();
 		return "home";
-	}
+	}*/
 	
 	
-	@RequestMapping(value = "/home", method = RequestMethod.GET)
+	/*@RequestMapping(value = "/home", method = RequestMethod.GET)
 	public String moodyHomePage(Model model) {
 		LOGGER.info("MoodyDevColtroller - moodyHome");
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		User user = personService.findByUsername(userDetails.getUsername());
 		model.addAttribute("person", user);
 		return "moodyHomePage";
-	}
+	}*/
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String login() {
@@ -92,7 +92,7 @@ public class MoodyDevController {
         }, 3, TimeUnit.SECONDS);
 	}
 	
-	private void fillBD() {
+	/*private void fillBD() {
 		personService.cleanCollection();
 		ArrayList<User> users = new ArrayList<User>();
 		ArrayList<GrantedAuthority> auth = new ArrayList<GrantedAuthority>();
@@ -108,8 +108,8 @@ public class MoodyDevController {
 		users.add(oleg);
 		users.add(anton);
 		users.add(lesha2);
-		personService.addUsers(users);
-	}
+		personService.saveUsers(users);
+	}*/
 	
 	
 }

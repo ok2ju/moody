@@ -1,26 +1,82 @@
 package com.mteam.moody.app.model.user.status;
 
 import java.util.Date;
+import java.util.List;
 
+import org.bson.types.ObjectId;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+/**
+ * Status. Every prsons post theirs statuses: text, smile, tags.
+ * @author Oleg Atsman
+ */
+@Document
 public class Status {
 	
-	private SmileTypes smileType;
+	@Id
+    private Object id = new ObjectId();
+	
+	private String author;
 	
 	private Date date;
 	
-	private String comment;
+	private String text;
 	
-	public Status(SmileTypes smileType, Date date, String comment) {
+	private List<String> tags;
+	
+	private SmileTypes smileType;
+	
+	private List<Comment> comments;
+
+	public Status(String author, Date date, String text, SmileTypes smileType) {
 		super();
-		this.smileType = smileType;
+		this.author = author;
 		this.date = date;
-		this.comment = comment;
+		this.text = text;
+		this.smileType = smileType;
 	}
 
-	/**
-	 * Getters and setters. <!---------------------------------------------------------------!>
-	 */
-	
+	public Object getId() {
+		return id;
+	}
+
+	public void setId(Object id) {
+		this.id = id;
+	}
+
+	public String getAuthor() {
+		return author;
+	}
+
+	public void setAuthor(String author) {
+		this.author = author;
+	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
+	public String getText() {
+		return text;
+	}
+
+	public void setText(String text) {
+		this.text = text;
+	}
+
+	public List<String> getTags() {
+		return tags;
+	}
+
+	public void setTags(List<String> tags) {
+		this.tags = tags;
+	}
+
 	public SmileTypes getSmileType() {
 		return smileType;
 	}
@@ -29,19 +85,12 @@ public class Status {
 		this.smileType = smileType;
 	}
 
-	public Date getData() {
-		return date;
+	public List<Comment> getComments() {
+		return comments;
 	}
 
-	public void setData(Date data) {
-		this.date = data;
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
 	}
-
-	public String getComment() {
-		return comment;
-	}
-
-	public void setComment(String comment) {
-		this.comment = comment;
-	}
+	
 }

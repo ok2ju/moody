@@ -9,8 +9,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.mteam.moody.app.DAO.UserDAO;
 import com.mteam.moody.app.model.user.User;
-import com.mteam.moody.app.service.UserService;
 
 @Service(value="myUserDetailsService")
 @Configurable
@@ -19,13 +19,13 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	private static final Logger LOGGER = LoggerFactory.getLogger(UserDetailsServiceImpl.class);
 	
 	@Autowired
-	private UserService userService;
+	private UserDAO userDAO;
 	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		LOGGER.info("UserDetailsServiceImpl loadUserByUsername: " + username);
-		LOGGER.info("UserDetailsServiceImpl loadUserByUsername userService: " + userService);
-		User user = userService.findByUsername(username);
+		LOGGER.info("UserDetailsServiceImpl loadUserByUsername userService: " + userDAO);
+		User user = userDAO.findByUsername(username);
 		if(user!=null){
 			return user.getUserDetails();
 		}else {

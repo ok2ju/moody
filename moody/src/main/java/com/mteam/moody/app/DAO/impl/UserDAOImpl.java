@@ -1,4 +1,4 @@
-package com.mteam.moody.app.service.impl;
+package com.mteam.moody.app.DAO.impl;
 
 import static org.springframework.data.mongodb.core.query.Criteria.where;
 
@@ -10,20 +10,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Repository;
 
+import com.mteam.moody.app.DAO.UserDAO;
 import com.mteam.moody.app.model.user.User;
-import com.mteam.moody.app.service.UserService;
 
-@Service
-public class UserServiceImpl implements UserService {
+@Repository
+public class UserDAOImpl implements UserDAO {
 	
-private static final Logger LOGGER = LoggerFactory.getLogger(UserServiceImpl.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(UserDAOImpl.class);
 	
     @Autowired
     private MongoTemplate mongoTemplate;
     
-    public UserServiceImpl() {
+    public UserDAOImpl() {
     	
     }
 
@@ -34,7 +34,7 @@ private static final Logger LOGGER = LoggerFactory.getLogger(UserServiceImpl.cla
 	}
 
 	@Override
-	public void addUser(User user) {
+	public void saveUser(User user) {
 		LOGGER.info("User Service - addUser: " + user.getUserDetails().getUsername());
 		if (!mongoTemplate.collectionExists(User.class)) {
             mongoTemplate.createCollection(User.class);
@@ -56,14 +56,15 @@ private static final Logger LOGGER = LoggerFactory.getLogger(UserServiceImpl.cla
 
 	@Override
 	public void deleteUser(String username) {
-		// TODO Auto-generated method stub
-		
+		LOGGER.info("User Service - deleteUserByUserName: " + username);
+		User user = findByUsername(username);
+		mongoTemplate.remove(user, COLLECTION_NAME);
 	}
 
 	@Override
 	public void updateUser(User user) {
 		LOGGER.info("User Service - updateUser username: " + user.getUserDetails().getUsername());
-		mongoTemplate.insert(user, COLLECTION_NAME);
+		mongoTemplate.save(user, COLLECTION_NAME);
 	}
 
 	@Override
@@ -78,7 +79,7 @@ private static final Logger LOGGER = LoggerFactory.getLogger(UserServiceImpl.cla
 	}
 
 	@Override
-	public void addUsers(List<User> users) {
+	public void saveUsers(List<User> users) {
 		LOGGER.info("User Service - addUsers. User.size : " + users.size());
 		mongoTemplate.insert(users, COLLECTION_NAME);
 	}

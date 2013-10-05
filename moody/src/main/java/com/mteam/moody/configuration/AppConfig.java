@@ -9,7 +9,9 @@ import com.mteam.moody.configuration.web.security.WebSecurityConfig;
 
 @Configuration
 @Import(value={MongoDBConfiguration.class, WebSecurityConfig.class})
-@ComponentScan(basePackages = {"com.mteam.moody.app.service", "com.mteam.moody.app.model"})
+@ComponentScan(basePackages = {"com.mteam.moody.app.service", 
+		"com.mteam.moody.app.model",
+		"com.mteam.moody.app.DAO"})
 public class AppConfig {
 	
 }

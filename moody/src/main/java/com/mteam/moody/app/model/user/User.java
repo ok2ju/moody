@@ -20,7 +20,7 @@ public class User {
     
     private List<Status> statuses;
     
-    private List<Follower> followers;
+    private List<Follower> following;
     
     public User() {
     	this.userDetails = new UserDetailsImpl();
